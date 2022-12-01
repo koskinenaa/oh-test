@@ -49,7 +49,7 @@
     }
   },
   "extra": {
-  	"wordpress-install-dir": "/var/www/html",
+  	"wordpress-install-dir": "/opt/app-root/src",
 	  "installer-paths": {
 	    "wp-content/plugins/{$name}": [
 	      "type:wordpress-plugin"

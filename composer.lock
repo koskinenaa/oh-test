@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e2fa7b29462fb71a04cd005c7b99ea4",
+    "content-hash": "c1b9fd21bb7637d9165ae4a1c35c23b9",
     "packages": [
         {
             "name": "city-of-helsinki/wordpress-helfi-hds-wp",
