@@ -43,6 +43,9 @@
       "composer/installers": true,
       "johnpbloch/wordpress-core-installer": true,
       "inpsyde/wp-translation-downloader": true
+    },
+    "platform": {
+      "php": "7.4.33"
     }
   },
   "extra": {
