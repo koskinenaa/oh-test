@@ -39,11 +39,11 @@
         "translations": {
             "fi": {
                 "updated": "2017-10-01 20:12:50",
-                "version": "5.6.4"
+                "version": "5.7"
             },
             "sv_SE": {
-                "updated": "2022-11-30 07:13:19",
-                "version": "5.6.4"
+                "updated": "2022-12-12 19:52:21",
+                "version": "5.7"
             }
         }
     },
@@ -71,23 +71,75 @@
         "translations": {
             "fi": {
                 "updated": "2022-09-20 08:28:36",
-                "version": "19.11"
+                "version": "19.12"
             },
             "sv_SE": {
-                "updated": "2022-11-29 15:35:42",
-                "version": "19.11"
+                "updated": "2022-12-14 14:34:48",
+                "version": "19.12"
             }
         }
     },
     "wordpress-core": {
         "translations": {
             "fi": {
-                "updated": "2022-10-26 17:27:26",
+                "updated": "2022-12-07 05:25:25",
                 "version": "6.1.1"
             },
             "sv_SE": {
-                "updated": "2022-11-10 18:05:14",
+                "updated": "2022-12-12 19:29:14",
                 "version": "6.1.1"
+            }
+        }
+    },
+    "limit-login-attempts-reloaded": {
+        "translations": {
+            "sv_SE": {
+                "updated": "2022-11-28 19:55:44",
+                "version": "2.25.10"
+            }
+        }
+    },
+    "duplicate-post": {
+        "translations": {
+            "fi": {
+                "updated": "2021-04-21 10:43:20",
+                "version": "4.5"
+            },
+            "sv_SE": {
+                "updated": "2022-09-05 09:30:25",
+                "version": "4.5"
+            }
+        }
+    },
+    "wordpress-importer": {
+        "translations": {
+            "fi": {
+                "updated": "2015-08-01 21:41:45",
+                "version": "0.8"
+            },
+            "sv_SE": {
+                "updated": "2022-09-29 08:01:01",
+                "version": "0.8"
+            }
+        }
+    },
+    "redirection": {
+        "translations": {
+            "fi": {
+                "updated": "2017-04-13 10:15:22",
+                "version": "5.3.6"
+            },
+            "sv_SE": {
+                "updated": "2022-12-10 19:42:03",
+                "version": "5.3.6"
+            }
+        }
+    },
+    "litespeed-cache": {
+        "translations": {
+            "sv_SE": {
+                "updated": "2022-12-12 19:29:29",
+                "version": "5.3.1"
             }
         }
     }

@@ -63,6 +63,11 @@
         "optimize-autoloader": true,
         "platform": {
           "php": "7.4.33"
+        },
+        "allow-plugins": {
+            "johnpbloch/wordpress-core-installer": true,
+            "composer/installers": true,
+            "inpsyde/wp-translation-downloader": true
         }
     },
     "scripts": {
