@@ -58,7 +58,7 @@
         "city-of-helsinki/wordpress-helfi-tpr": "dev-main"
     },
     "config": {
-        "vendor-dir": "/opt/app-root/src/content/vendor",
+        "vendor-dir": "public_html/content/vendor",
         "optimize-autoloader": true,
         "platform": {
           "php": "7.4.33"
@@ -75,16 +75,16 @@
         "wpstarter": "WCM\\WPStarter\\Setup::run"
     },
     "extra": {
-        "wordpress-install-dir": "/opt/app-root/src/wp",
-        "wordpress-content-dir": "/opt/app-root/src/content",
+        "wordpress-install-dir": "public_html/wp",
+        "wordpress-content-dir": "public_html/content",
         "wpstarter": {
           "prevent-overwrite": [
             ".gitignore",
-            "/opt/app-root/src/.htaccess",
-            "/opt/app-root/src/wp-config.php",
+            "public_html/.htaccess",
+            "public_html/wp-config.php",
             "index.php"
           ],
-            "env-example": "/opt/app-root/src/content/vendor/wecodemore/wpstarter/wpstarter/templates/.env.example",
+            "env-example": "public_html/content/vendor/wecodemore/wpstarter/wpstarter/templates/.env.example",
             "gitignore": {
                 "wp": true,
                 "wp-content": true,
@@ -99,13 +99,13 @@
             }
         },
         "installer-paths": {
-            "/opt/app-root/src/content/plugins/{$name}": [
+            "public_html/content/plugins/{$name}": [
                 "type:wordpress-plugin"
             ],
-            "/opt/app-root/src/content/mu-plugins/{$name}": [
+            "public_html/content/mu-plugins/{$name}": [
                 "type:wordpress-muplugin"
             ],
-            "/opt/app-root/src/content/themes/{$name}": [
+            "public_html/content/themes/{$name}": [
                 "type:wordpress-theme"
             ]
         },
@@ -114,7 +114,7 @@
 	            "fi",
 				"sv_SE"
 	        ],
-	        "directory": "/opt/app-root/src/content/languages"
+	        "directory": "public_html/content/languages"
         }
     }
 }
