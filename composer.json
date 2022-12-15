@@ -1,72 +1,116 @@
 {
-  "name": "city-of-helsinki/wordpress",
-  "type": "project",
-  "repositories": [
-    {
-  		"type": "vcs",
-  		"url": "https://github.com/City-of-Helsinki/wordpress-helfi-hds-wp.git"
-  	},
-  	{
-  		"type": "vcs",
-  		"url": "https://github.com/City-of-Helsinki/wordpress-helfi-helsinkiteema.git"
-  	},
-    {
-      "type": "composer",
-      "url": "https://wpackagist.org"
-    }
-  ],
-  "require": {
-    "johnpbloch/wordpress-core-installer": "^2.0",
-    "johnpbloch/wordpress-core": "^6.1.0",
-
-    "wp-cli/wp-cli-bundle": "^2.5.0",
-
-    "wpackagist-plugin/disable-emojis": ">1.7",
-    "wpackagist-plugin/disable-embeds": ">=1.5.0",
-    "wpackagist-plugin/enable-media-replace": ">3.0",
-    "wpackagist-plugin/polylang": ">2.9",
-    "wpackagist-plugin/wp-media-library-categories": ">1.9",
-    "wpackagist-plugin/contact-form-7": ">1.0",
-    "wpackagist-plugin/contact-form-7-honeypot": ">1.0",
-    "wpackagist-plugin/wordpress-seo": ">15.0",
-    "wpackagist-plugin/maintenance": ">4.0",
-
-    "city-of-helsinki/wordpress-helfi-helsinkiteema": "dev-main",
-    "city-of-helsinki/wordpress-helfi-hds-wp": "dev-main",
-
-    "inpsyde/wp-translation-downloader": "^2.0"
-  },
-  "config": {
-    "optimize-autoloader": true,
-    "preferred-install": "dist",
-    "allow-plugins": {
-      "composer/installers": true,
-      "johnpbloch/wordpress-core-installer": true,
-      "inpsyde/wp-translation-downloader": true
+    "name": "artcloud/helsinki-universal",
+    "description": "Setup WordPress site with Helsinki Universal theme",
+    "type": "project",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": {
+        "wordpress-helfi-tpr": {
+            "type": "vcs",
+            "url": "https://github.com/City-of-Helsinki/wordpress-helfi-tpr"
+        },
+        "wordpress-helfi-chat": {
+            "type": "vcs",
+            "url": "https://github.com/City-of-Helsinki/wordpress-helfi-chat"
+        },
+        "wordpress-helfi-linkedevents": {
+            "type": "vcs",
+            "url": "https://github.com/City-of-Helsinki/wordpress-helfi-linkedevents"
+        },
+        "2": {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        },
+        "3": {
+            "type": "vcs",
+            "url": "https://github.com/City-of-Helsinki/wordpress-helfi-helsinkiteema.git"
+        },
+        "4": {
+            "type": "vcs",
+            "url": "https://github.com/City-of-Helsinki/wordpress-helfi-hds-wp.git"
+        }
     },
-    "platform": {
-      "php": "7.4.33"
-    }
-  },
-  "extra": {
-  	"wordpress-install-dir": "/opt/app-root/src",
-	  "installer-paths": {
-	    "wp-content/plugins/{$name}": [
-	      "type:wordpress-plugin"
-	    ],
-	    "wp-content/mu-plugins/{$name}": [
-	      "type:wordpress-muplugin"
-	    ],
-	    "wp-content/themes/{$name}": [
-	      "type:wordpress-theme"
-	    ]
-	  },
+    "require": {
+        "wecodemore/wpstarter": "~2.0",
+        "johnpbloch/wordpress-core": "^6.1",
+        "wpackagist-plugin/disable-emojis": "^1.7",
+        "wpackagist-plugin/litespeed-cache": "^5.3",
+        "wpackagist-plugin/enable-media-replace": "^4.0",
+        "wpackagist-plugin/visual-term-description-editor": ">1.8",
+        "wpackagist-plugin/polylang": "^3.2",
+        "wpackagist-plugin/wp-media-library-categories": ">1.9",
+        "wpackagist-plugin/wp-favicon-remover": ">1.0",
+        "wpackagist-plugin/contact-form-7": "^5.6",
+        "wpackagist-plugin/contact-form-7-honeypot": "^2.1",
+        "wpackagist-plugin/wordpress-seo": "^19.9",
+        "wpackagist-plugin/wp-piwik": "^1.0",
+        "city-of-helsinki/wordpress-helfi-helsinkiteema": "dev-main",
+        "city-of-helsinki/wordpress-helfi-hds-wp": "dev-main",
+	      "inpsyde/wp-translation-downloader": "^2.0",
+        "johnpbloch/wordpress": "^6.1",
+        "wpackagist-plugin/maintenance": "^4.06",
+        "wpackagist-plugin/siteimprove": "^1.2",
+        "wpackagist-plugin/duplicate-post": "^4.5",
+        "city-of-helsinki/wordpress-helfi-linkedevents": "dev-main",
+        "wpackagist-plugin/limit-login-attempts-reloaded": "^2.25",
+        "wpackagist-plugin/redirection": "^5.3",
+        "wpackagist-plugin/wordpress-importer": "^0.8.0",
+        "city-of-helsinki/wordpress-helfi-chat": "dev-main",
+        "city-of-helsinki/wordpress-helfi-tpr": "dev-main"
+    },
+    "config": {
+        "vendor-dir": "/opt/app-root/src/content/vendor",
+        "optimize-autoloader": true,
+        "platform": {
+          "php": "7.4.33"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": "WCM\\WPStarter\\Setup::run",
+        "post-update-cmd": "WCM\\WPStarter\\Setup::run",
+        "wpstarter": "WCM\\WPStarter\\Setup::run"
+    },
+    "extra": {
+        "wordpress-install-dir": "/opt/app-root/src/wp",
+        "wordpress-content-dir": "/opt/app-root/src/content",
+        "wpstarter": {
+          "prevent-overwrite": [
+            ".gitignore",
+            "/opt/app-root/src/.htaccess",
+            "/opt/app-root/src/wp-config.php",
+            "index.php"
+          ],
+            "env-example": "/opt/app-root/src/content/vendor/wecodemore/wpstarter/wpstarter/templates/.env.example",
+            "gitignore": {
+                "wp": true,
+                "wp-content": true,
+                "vendor": true,
+                "common": true,
+                "custom": [
+                    "*.log",
+                    ".htaccess",
+                    "sitemap.xml",
+                    "sitemap.xml.gz"
+                ]
+            }
+        },
+        "installer-paths": {
+            "/opt/app-root/src/content/plugins/{$name}": [
+                "type:wordpress-plugin"
+            ],
+            "/opt/app-root/src/content/mu-plugins/{$name}": [
+                "type:wordpress-muplugin"
+            ],
+            "/opt/app-root/src/content/themes/{$name}": [
+                "type:wordpress-theme"
+            ]
+        },
 		"wp-translation-downloader": {
-	    "languages": [
-	      "fi",
+            "languages": [
+	            "fi",
 				"sv_SE"
-	    ],
-	    "directory": "wp-content/languages"
+	        ],
+	        "directory": "/opt/app-root/src/content/languages"
+        }
     }
-  }
 }
