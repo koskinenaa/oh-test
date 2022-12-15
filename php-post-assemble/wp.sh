@@ -6,7 +6,7 @@
 
 ./composer.phar config repositories.wpackagist composer https://wpackagist.org
 
-./composer.phar config --json extra '"installer-paths": {"wp-content/plugins/{$name}": ["type:wordpress-plugin"], "wp-content/mu-plugins/{$name}": ["type:wordpress-muplugin"], "wp-content/themes/{$name}": ["type:wordpress-theme"]}'
+./composer.phar config --json extra.installer-paths '{"wp-content/plugins/{$name}": ["type:wordpress-plugin"], "wp-content/mu-plugins/{$name}": ["type:wordpress-muplugin"], "wp-content/themes/{$name}": ["type:wordpress-theme"]}'
 
 ./composer.phar config --no-plugins allow-plugins.composer/installers true
 
