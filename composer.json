@@ -39,7 +39,6 @@
         "wpackagist-plugin/visual-term-description-editor": ">1.8",
         "wpackagist-plugin/polylang": "^3.2",
         "wpackagist-plugin/wp-media-library-categories": ">1.9",
-        "wpackagist-plugin/wp-favicon-remover": ">1.0",
         "wpackagist-plugin/contact-form-7": "^5.6",
         "wpackagist-plugin/contact-form-7-honeypot": "^2.1",
         "wpackagist-plugin/wordpress-seo": "^19.9",
