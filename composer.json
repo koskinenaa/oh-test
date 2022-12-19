@@ -1,9 +1,6 @@
 {
-    "name": "artcloud/helsinki-universal",
-    "description": "Setup WordPress site with Helsinki Universal theme",
+    "name": "city-of-helsinki/wordpress",
     "type": "project",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "repositories": {
         "wordpress-helfi-tpr": {
             "type": "vcs",
@@ -31,43 +28,31 @@
         }
     },
     "require": {
-        "wecodemore/wpstarter": "~2.0",
-        "johnpbloch/wordpress-core": "^6.1",
-        "wpackagist-plugin/disable-emojis": "^1.7",
-        "wpackagist-plugin/litespeed-cache": "^5.3",
-        "wpackagist-plugin/enable-media-replace": "^4.0",
-        "wpackagist-plugin/visual-term-description-editor": ">1.8",
-        "wpackagist-plugin/polylang": "^3.2",
-        "wpackagist-plugin/wp-media-library-categories": ">1.9",
-        "wpackagist-plugin/contact-form-7": "^5.6",
-        "wpackagist-plugin/contact-form-7-honeypot": "^2.1",
-        "wpackagist-plugin/wordpress-seo": "^19.9",
-        "wpackagist-plugin/wp-piwik": "^1.0",
-        "city-of-helsinki/wordpress-helfi-helsinkiteema": "dev-main",
-        "city-of-helsinki/wordpress-helfi-hds-wp": "dev-main",
-	      "inpsyde/wp-translation-downloader": "^2.0",
-        "johnpbloch/wordpress": "^6.1",
-        "wpackagist-plugin/maintenance": "^4.06",
-        "wpackagist-plugin/siteimprove": "^1.2",
-        "wpackagist-plugin/duplicate-post": "^4.5",
-        "city-of-helsinki/wordpress-helfi-linkedevents": "dev-main",
-        "wpackagist-plugin/limit-login-attempts-reloaded": "^2.25",
-        "wpackagist-plugin/redirection": "^5.3",
-        "wpackagist-plugin/wordpress-importer": "^0.8.0",
-        "city-of-helsinki/wordpress-helfi-chat": "dev-main",
-        "city-of-helsinki/wordpress-helfi-tpr": "dev-main"
+      "johnpbloch/wordpress-core-installer": "^2.0",
+      "johnpbloch/wordpress-core": "^6.1.0",
+
+      "wp-cli/wp-cli-bundle": "^2.5.0",
+
+      "city-of-helsinki/wordpress-helfi-helsinkiteema": "dev-main",
+      "city-of-helsinki/wordpress-helfi-hds-wp": "dev-main",
+
+      "city-of-helsinki/wordpress-helfi-linkedevents": "dev-main",
+      "city-of-helsinki/wordpress-helfi-chat": "dev-main",
+      "city-of-helsinki/wordpress-helfi-tpr": "dev-main",
+
+      "inpsyde/wp-translation-downloader": "^2.0"
     },
     "config": {
-        "vendor-dir": "public_html/content/vendor",
-        "optimize-autoloader": true,
-        "platform": {
-          "php": "7.4.33"
-        },
-        "allow-plugins": {
-            "johnpbloch/wordpress-core-installer": true,
-            "composer/installers": true,
-            "inpsyde/wp-translation-downloader": true
-        }
+      "optimize-autoloader": true,
+      "preferred-install": "dist",
+      "allow-plugins": {
+        "composer/installers": true,
+        "johnpbloch/wordpress-core-installer": true,
+        "inpsyde/wp-translation-downloader": true
+      },
+      "platform": {
+        "php": "7.4.33"
+      }
     },
     "scripts": {
         "post-install-cmd": "WCM\\WPStarter\\Setup::run",
@@ -75,46 +60,24 @@
         "wpstarter": "WCM\\WPStarter\\Setup::run"
     },
     "extra": {
-        "wordpress-install-dir": "public_html/wp",
-        "wordpress-content-dir": "public_html/content",
-        "wpstarter": {
-          "prevent-overwrite": [
-            ".gitignore",
-            "public_html/.htaccess",
-            "public_html/wp-config.php",
-            "index.php"
-          ],
-            "env-example": "public_html/content/vendor/wecodemore/wpstarter/wpstarter/templates/.env.example",
-            "gitignore": {
-                "wp": true,
-                "wp-content": true,
-                "vendor": true,
-                "common": true,
-                "custom": [
-                    "*.log",
-                    ".htaccess",
-                    "sitemap.xml",
-                    "sitemap.xml.gz"
-                ]
-            }
-        },
-        "installer-paths": {
-            "public_html/content/plugins/{$name}": [
-                "type:wordpress-plugin"
-            ],
-            "public_html/content/mu-plugins/{$name}": [
-                "type:wordpress-muplugin"
-            ],
-            "public_html/content/themes/{$name}": [
-                "type:wordpress-theme"
-            ]
-        },
-		"wp-translation-downloader": {
-            "languages": [
-	            "fi",
-				"sv_SE"
-	        ],
-	        "directory": "public_html/content/languages"
-        }
+      "wordpress-install-dir": "/opt/app-root/src",
+  	  "installer-paths": {
+  	    "wp-content/plugins/{$name}": [
+  	      "type:wordpress-plugin"
+  	    ],
+  	    "wp-content/mu-plugins/{$name}": [
+  	      "type:wordpress-muplugin"
+  	    ],
+  	    "wp-content/themes/{$name}": [
+  	      "type:wordpress-theme"
+  	    ]
+  	  },
+      "wp-translation-downloader": {
+        "languages": [
+          "fi",
+          "sv_SE"
+        ],
+        "directory": "wp-content/languages"
+      }
     }
 }
