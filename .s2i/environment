@@ -1,0 +1,2 @@
+PATH='/opt/app-root/src/bin:/opt/app-root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/app-root/src/vendor/bin'
+WORDPRESS_CONFIG_EXTRA='define( 'MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL );'
