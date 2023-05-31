@@ -29,16 +29,16 @@
     },
     "require": {
       "johnpbloch/wordpress-core-installer": "^2.0",
-      "johnpbloch/wordpress-core": "^6.1.0",
+      "johnpbloch/wordpress-core": "*",
 
       "wp-cli/wp-cli-bundle": "^2.5.0",
 
-      "city-of-helsinki/wordpress-helfi-helsinkiteema": "dev-main",
-      "city-of-helsinki/wordpress-helfi-hds-wp": "dev-main",
+      "city-of-helsinki/wordpress-helfi-helsinkiteema": "*",
+      "city-of-helsinki/wordpress-helfi-hds-wp": "*",
 
-      "city-of-helsinki/wordpress-helfi-linkedevents": "dev-main",
-      "city-of-helsinki/wordpress-helfi-chat": "dev-main",
-      "city-of-helsinki/wordpress-helfi-tpr": "dev-main",
+      "city-of-helsinki/wordpress-helfi-linkedevents": "*",
+      "city-of-helsinki/wordpress-helfi-chat": "*",
+      "city-of-helsinki/wordpress-helfi-tpr": "*",
 
       "inpsyde/wp-translation-downloader": "^2.0"
     },
@@ -49,9 +49,6 @@
         "composer/installers": true,
         "johnpbloch/wordpress-core-installer": true,
         "inpsyde/wp-translation-downloader": true
-      },
-      "platform": {
-        "php": "7.4.33"
       }
     },
     "scripts": {
