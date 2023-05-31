@@ -38,6 +38,8 @@
       "city-of-helsinki/wordpress-helfi-chat": "*",
       "city-of-helsinki/wordpress-helfi-tpr": "*",
 
+      "wp-cli/wp-cli-bundle": "^2.5.0",
+
       "inpsyde/wp-translation-downloader": "^2.0"
     },
     "config": {
