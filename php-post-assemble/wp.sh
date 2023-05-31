@@ -7,5 +7,6 @@
 # ./composer.phar require ${INSTALLABLE_PACKAGES}
 
 # kun wp-config.php ja tietokanta ovat asetettu
-INSTALLED_PLUGINS=$(bash wp plugin list --status=inactive --field=name)
-bash /opt/app-root/src/vendor/wp-cli/wp-cli/bin/wp plugin activate "${INSTALLED_PLUGINS}"
+WP_CLI='/opt/app-root/src/vendor/wp-cli/wp-cli/bin/wp'
+INSTALLED_PLUGINS=$(bash ${WP_CLI} plugin list --status=inactive --field=name)
+bash ${WP_CLI} plugin activate "${INSTALLED_PLUGINS}"
