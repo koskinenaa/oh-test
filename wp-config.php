@@ -24,6 +24,7 @@ define( 'DB_PASSWORD', getenv_docker('WORDPRESS_DB_PASSWORD', 'example password'
 define( 'DB_HOST', getenv_docker('WORDPRESS_DB_HOST', 'mysql') );
 define( 'DB_CHARSET', getenv_docker('WORDPRESS_DB_CHARSET', 'utf8') );
 define( 'DB_COLLATE', getenv_docker('WORDPRESS_DB_COLLATE', '') );
+define( 'MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL );
 
 $table_prefix = getenv_docker('WORDPRESS_TABLE_PREFIX', 'wp_');
 
@@ -59,11 +60,6 @@ define( 'IMAGE_EDIT_OVERWRITE', getenv_docker('WORDPRESS_IMAGE_EDIT_OVERWRITE', 
 
 define( 'WP_CRON_LOCK_TIMEOUT', getenv_docker('WORDPRESS_CRON_LOCK_TIMEOUT', 300) );
 define( 'DISABLE_WP_CRON', getenv_docker('WORDPRESS_DISABLE_CRON', true) );
-
-// Extras
-if ($configExtra = getenv_docker('WORDPRESS_CONFIG_EXTRA', '')) {
-	eval($configExtra);
-}
 
 // If we're behind a proxy server and using HTTPS, we need to alert WordPress of that fact
 // see also https://wordpress.org/support/article/administration-over-ssl/#using-a-reverse-proxy
