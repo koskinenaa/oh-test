@@ -31,8 +31,6 @@
       "johnpbloch/wordpress-core-installer": "^2.0",
       "johnpbloch/wordpress-core": "*",
 
-      "wp-cli/wp-cli-bundle": "^2.5.0",
-
       "city-of-helsinki/wordpress-helfi-helsinkiteema": "*",
       "city-of-helsinki/wordpress-helfi-hds-wp": "*",
 
