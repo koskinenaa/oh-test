@@ -1,0 +1,17 @@
+#!/bin/bash
+echo "Before assembling"
+
+whoami
+
+/usr/libexec/s2i/assemble
+rc=$?
+
+if [ $rc -eq 0 ]; then
+    echo "After successful assembling"
+else
+    echo "After failed assembling"
+fi
+
+whoami
+
+exit $rc
