@@ -2,9 +2,10 @@
 
 # ls -la /opt/app-root/src/vendor/wp-cli
 # ls -la /opt/app-root/src/vendor
-bash /opt/app-root/src/vendor/wp-cli/wp-cli/bin/wp --version
+# bash /opt/app-root/src/vendor/wp-cli/wp-cli/bin/wp --version
 
 # ./composer.phar require ${INSTALLABLE_PACKAGES}
 
 # kun wp-config.php ja tietokanta ovat asetettu
-# bash wp plugin activate $(bash wp plugin list --status=inactive --field=name)
+INSTALLED_PLUGINS=$(bash wp plugin list --status=inactive --field=name)
+bash /opt/app-root/src/vendor/wp-cli/wp-cli/bin/wp plugin activate "${INSTALLED_PLUGINS}"
