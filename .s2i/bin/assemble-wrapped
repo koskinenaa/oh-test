@@ -1,10 +1,6 @@
 #!/bin/bash
 echo "Before assembling"
 
-dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
-
-dnf install -y mysql-community-client
-
 /usr/libexec/s2i/assemble
 rc=$?
 
@@ -13,7 +9,5 @@ if [ $rc -eq 0 ]; then
 else
     echo "After failed assembling"
 fi
-
-whoami
 
 exit $rc

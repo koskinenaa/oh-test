@@ -1,0 +1,7 @@
+#!/bin/bash
+
+wp db create
+
+wp plugin activate $(wp plugin list --status=inactive --field=name)
+
+exec /usr/libexec/s2i/run
