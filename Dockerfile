@@ -6,7 +6,7 @@ ENV PATH='/opt/app-root/src/bin:/opt/app-root/bin:/usr/local/sbin:/usr/local/bin
 ENV AZURE_SQL_SSL_CA_PATH='/usr/local/share/ca-certificates/DigiCertGlobalRootCA.crt.pem'
 
 ENV DISPLAY_ERRORS=OFF
-ENV DOCUMENTROOT=/public
+# ENV DOCUMENTROOT=/public
 
 USER 0
 
