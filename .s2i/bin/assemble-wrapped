@@ -6,6 +6,9 @@ rc=$?
 
 if [ $rc -eq 0 ]; then
     echo "After successful assembling"
+
+    mv /opt/app-root/src/composer.phar /usr/bin/composer
+    chmod +x /usr/bin/composer
 else
     echo "After failed assembling"
 fi
