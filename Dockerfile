@@ -5,6 +5,8 @@ ARG WP_CLI_URL="https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp
 ENV PATH='/opt/app-root/src/bin:/opt/app-root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/app-root/src/vendor/bin'
 ENV AZURE_SQL_SSL_CA_PATH='/usr/local/share/ca-certificates/DigiCertGlobalRootCA.crt.pem'
 
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
 ENV DISPLAY_ERRORS=OFF
 # ENV DOCUMENTROOT=/public
 
