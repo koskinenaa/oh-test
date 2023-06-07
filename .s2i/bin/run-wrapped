@@ -1,7 +1,6 @@
 #!/bin/bash
 
-WORDPRESS_INSTALLED=$(wp core is-installed)
-if [ ${WORDPRESS_INSTALLED} -ne 0 ]; then
+if ! wp core is-installed; then
     wp core install \
         --url="${WORDPRESS_TEMP_URL}" \
         --title="${WORDPRESS_SITE_TITLE}" \
