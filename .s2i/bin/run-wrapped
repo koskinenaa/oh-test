@@ -1,0 +1,8 @@
+#!/bin/bash
+
+which wp
+
+which composer
+
+
+exec /usr/libexec/s2i/run
