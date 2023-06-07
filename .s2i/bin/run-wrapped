@@ -1,5 +1,17 @@
 #!/bin/bash
 
-which wp
+WORDPRESS_INSTALLED=$(wp core is-installed)
+if [ ${WORDPRESS_INSTALLED} -ne 0 ]; then
+    wp core install \
+        --url="${WORDPRESS_TEMP_URL}" \
+        --title="${WORDPRESS_SITE_TITLE}" \
+        --admin_user="${WORDPRESS_ADMIN_EMAIL}" \
+        --admin_email="${WORDPRESS_ADMIN_EMAIL}" \
+        --admin_password="${WORDPRESS_ADMIN_TEMP_PASSWORD}" \
+        --locale=${WORDPRESS_LOCALE} \
+        --skip-email
+
+    wp user reset-password "${WORDPRESS_ADMIN_EMAIL}" --skip-email
+fi
 
 exec /usr/libexec/s2i/run
