@@ -1,2 +1,1 @@
-# helsinkibase
- 
+# Basic Helsinki WP site
