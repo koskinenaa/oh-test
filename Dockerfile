@@ -12,6 +12,9 @@ ENV DISPLAY_ERRORS=OFF
 
 USER 0
 
+# Additional php-fpm settings
+RUN echo "clear_env = no" >> /etc/php-fpm.d/www.conf
+
 # CA cert for MySQL Database
 RUN mkdir -p /usr/local/share/ca-certificates && \
     wget https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem -O $AZURE_SQL_SSL_CA_PATH
