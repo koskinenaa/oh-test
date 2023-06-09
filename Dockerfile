@@ -19,11 +19,9 @@ RUN echo "clear_env = no" >> /etc/php-fpm.d/www.conf
 RUN mkdir -p /usr/local/share/ca-certificates && \
     wget https://dl.cacerts.digicert.com/DigiCertGlobalRootCA.crt.pem -O $AZURE_SQL_SSL_CA_PATH
 
-# MySql and Helm repository
-RUN dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
-
-# MySql install
-RUN dnf install -y mysql-community-client
+# Install MySql
+RUN dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm && \
+    dnf install -y mysql-community-client
 
 # WP CLI
 RUN wget $WP_CLI_URL -O /usr/bin/wp && \
@@ -36,6 +34,19 @@ RUN chmod +x /tmp/src/.s2i/bin/assemble-wrapped /tmp/src/.s2i/bin/run-wrapped
 
 # Install the dependencies
 RUN /tmp/src/.s2i/bin/assemble-wrapped
+
+# Remove part which runs file permission operations
+RUN sed -i '/mkdir -p ${PHP_FPM_RUN_DIR}/,/chown -R 1001:0 ${PHP_FPM_LOG_PATH}/d' /usr/libexec/s2i/run
+
+# Run those permission operations in Dockerfile instead
+RUN mkdir -p ${PHP_FPM_RUN_DIR} && \
+    chmod -R a+rwx ${PHP_FPM_RUN_DIR} && \
+    chown -R 1001:0 ${PHP_FPM_RUN_DIR} && \
+    mkdir -p ${PHP_FPM_LOG_PATH} && \
+    chmod -R a+rwx ${PHP_FPM_LOG_PATH} && \
+    chown -R 1001:0 ${PHP_FPM_LOG_PATH} && \
+    chmod -R a+rwx ${PHP_SYSCONF_PATH}/php.ini && \
+    chmod -R a+rwx ${PHP_SYSCONF_PATH}/php.d/10-opcache.ini
 
 # Set the default command for the resulting image
 CMD /opt/app-root/src/.s2i/bin/run-wrapped
