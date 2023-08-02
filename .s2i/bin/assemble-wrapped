@@ -34,7 +34,7 @@ if [ $rc -eq 0 ]; then
         echo "# Install additional Composer packages"
 
         # composer require $(echo "${COMPOSER_PACKAGES}" | xargs)
-        composer require wpackagist-plugin/wordpress-seo wpackagist-plugin/maintenance
+        composer require "wpackagist-plugin/wordpress-seo:20.12" "wpackagist-plugin/maintenance:*"
     else
         echo "# No additional Composer packages to install"
     fi
