@@ -1,6 +1,9 @@
 #!/bin/bash
 echo "===== BEFORE S2I ASSEMBLE ====="
 
+echo "# Backup composer.json"
+cp /tmp/src/composer.json /tmp/src/composer.json.bak
+
 echo "===== S2I ASSEMBLE ====="
 /usr/libexec/s2i/assemble
 rc=$?
@@ -8,14 +11,17 @@ rc=$?
 if [ $rc -eq 0 ]; then
     echo "===== S2I ASSEMBLE SUCCESSFUL ====="
 
+    echo "# Restore composer.json"
+    mv /tmp/src/composer.json.bak /tmp/src/composer.json
+
     echo "# Setup composer bin"
     mv /opt/app-root/src/composer.phar /usr/bin/composer
     chmod +x /usr/bin/composer
 
-    echo "# Allow Composer installers"
-    composer config --no-plugins allow-plugins.composer/installers true
-    composer config --no-plugins allow-plugins.inpsyde/wp-translation-downloader true
-    composer config --no-plugins allow-plugins.johnpbloch/wordpress-core-installer true
+    # echo "# Allow Composer installers"
+    # composer config --no-plugins allow-plugins.composer/installers true
+    # composer config --no-plugins allow-plugins.inpsyde/wp-translation-downloader true
+    # composer config --no-plugins allow-plugins.johnpbloch/wordpress-core-installer true
 
     if [[ ${COMPOSER_REPOSITORIES} ]]; then
         echo "# Setup additional Composer repositories"
@@ -33,8 +39,7 @@ if [ $rc -eq 0 ]; then
     if [[ ${COMPOSER_PACKAGES} ]]; then
         echo "# Install additional Composer packages"
 
-        # composer require $(echo "${COMPOSER_PACKAGES}" | xargs)
-        composer require "wpackagist-plugin/wordpress-seo:20.12" "wpackagist-plugin/maintenance:*"
+        composer require ${COMPOSER_PACKAGES}
     else
         echo "# No additional Composer packages to install"
     fi
