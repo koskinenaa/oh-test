@@ -1,16 +1,41 @@
 #!/bin/bash
-echo "Before assembling"
+echo "===== BEFORE S2I ASSEMBLE ====="
 
+echo "===== S2I ASSEMBLE ====="
 /usr/libexec/s2i/assemble
 rc=$?
 
 if [ $rc -eq 0 ]; then
-    echo "After successful assembling"
+    echo "===== S2I ASSEMBLE SUCCESSFUL ====="
 
+    echo "# Setup composer bin"
     mv /opt/app-root/src/composer.phar /usr/bin/composer
     chmod +x /usr/bin/composer
+
+    if [[ ${COMPOSER_REPOSITORIES} ]]; then
+        echo "# Setup additional Composer repositories"
+
+        readarray -td "|" REPOSITORIES_LIST <<< "${COMPOSER_REPOSITORIES}"; declare -a REPOSITORIES_LIST;
+
+        for REPO_NAME_TYPE_URL in "${REPOSITORIES_LIST[@]}"
+        do
+            composer config repositories.$(echo "${REPO_NAME_TYPE_URL}" | xargs)
+        done
+    else
+        echo "# No additional Composer repositories to add"
+    fi
+
+    if [[ ${COMPOSER_PACKAGES} ]]; then
+        echo "# Install additional Composer packages"
+
+        composer require "${COMPOSER_PACKAGES}"
+    else
+        echo "# No additional Composer packages to install"
+    fi
 else
-    echo "After failed assembling"
+    echo "===== S2I ASSEMBLE FAILED ====="
 fi
+
+echo "===== S2I ASSEMBLE READY ====="
 
 exit $rc
