@@ -49,11 +49,6 @@
         "inpsyde/wp-translation-downloader": true
       }
     },
-    "scripts": {
-        "post-install-cmd": "WCM\\WPStarter\\Setup::run",
-        "post-update-cmd": "WCM\\WPStarter\\Setup::run",
-        "wpstarter": "WCM\\WPStarter\\Setup::run"
-    },
     "extra": {
       "wordpress-install-dir": "/opt/app-root/src",
   	  "installer-paths": {
