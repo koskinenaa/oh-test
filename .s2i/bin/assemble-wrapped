@@ -1,20 +1,18 @@
 #!/bin/bash
-echo "===== BEFORE S2I ASSEMBLE ====="
+echo -e "\n===== BEFORE S2I ASSEMBLE =====\n"
 
 echo "# Backup composer.json"
 cp /tmp/src/composer.json /tmp/composer.json.bak
-cat /tmp/composer.json.bak
 
-echo "===== S2I ASSEMBLE ====="
+echo -e "\n===== S2I ASSEMBLE =====\n"
 /usr/libexec/s2i/assemble
 rc=$?
 
 if [ $rc -eq 0 ]; then
-    echo "===== S2I ASSEMBLE SUCCESSFUL ====="
+    echo -e "\n===== S2I ASSEMBLE SUCCESSFUL =====\n"
 
     echo "# Restore composer.json"
     mv /tmp/composer.json.bak /opt/app-root/src/composer.json
-    cat /opt/app-root/src/composer.json
 
     echo "# Setup composer bin"
     mv /opt/app-root/src/composer.phar /usr/bin/composer
@@ -46,9 +44,9 @@ if [ $rc -eq 0 ]; then
         echo "# No additional Composer packages to install"
     fi
 else
-    echo "===== S2I ASSEMBLE FAILED ====="
+    echo -e "\n===== S2I ASSEMBLE FAILED =====\n"
 fi
 
-echo "===== S2I ASSEMBLE READY ====="
+echo -e "\n===== S2I ASSEMBLE READY =====\n"
 
 exit $rc
