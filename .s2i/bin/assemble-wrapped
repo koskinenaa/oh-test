@@ -18,11 +18,6 @@ if [ $rc -eq 0 ]; then
     mv /opt/app-root/src/composer.phar /usr/bin/composer
     chmod +x /usr/bin/composer
 
-    # echo "# Allow Composer installers"
-    # composer config --no-plugins allow-plugins.composer/installers true
-    # composer config --no-plugins allow-plugins.inpsyde/wp-translation-downloader true
-    # composer config --no-plugins allow-plugins.johnpbloch/wordpress-core-installer true
-
     if [[ ${COMPOSER_REPOSITORIES} ]]; then
         echo "# Setup additional Composer repositories"
 
