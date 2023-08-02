@@ -2,8 +2,10 @@
 echo "===== BEFORE S2I ASSEMBLE ====="
 
 echo "# Backup composer.json"
-cp /opt/app-root/src/composer.json /opt/app-root/src/composer.json.bak
-cat /opt/app-root/src/composer.json.bak
+echo "$PWD"
+ls
+cp "$PWD"/composer.json "$PWD"/composer.json.bak
+cat "$PWD"/composer.json.bak
 
 echo "===== S2I ASSEMBLE ====="
 /usr/libexec/s2i/assemble
@@ -13,8 +15,8 @@ if [ $rc -eq 0 ]; then
     echo "===== S2I ASSEMBLE SUCCESSFUL ====="
 
     echo "# Restore composer.json"
-    mv /opt/app-root/src/composer.json.bak /opt/app-root/src/composer.json
-    cat /opt/app-root/src/composer.json
+    mv "$PWD"/composer.json.bak "$PWD"/composer.json
+    cat "$PWD"/composer.json
 
     echo "# Setup composer bin"
     mv /opt/app-root/src/composer.phar /usr/bin/composer
