@@ -1,6 +1,27 @@
 #!/bin/bash
 echo "===== BEFORE S2I ASSEMBLE ====="
 
+if [[ ${COMPOSER_REPOSITORIES} ]]; then
+    echo "# Setup additional Composer repositories"
+
+    readarray -td "|" REPOSITORIES_LIST <<< "${COMPOSER_REPOSITORIES}"; declare -a REPOSITORIES_LIST;
+
+    for REPO_NAME_TYPE_URL in "${REPOSITORIES_LIST[@]}"
+    do
+        php composer.phar config repositories.$(echo "${REPO_NAME_TYPE_URL}" | xargs)
+    done
+else
+    echo "# No additional Composer repositories to add"
+fi
+
+if [[ ${COMPOSER_PACKAGES} ]]; then
+    echo "# Install additional Composer packages"
+
+    php composer.phar require "${COMPOSER_PACKAGES} --no-install"
+else
+    echo "# No additional Composer packages to install"
+fi
+
 echo "===== S2I ASSEMBLE ====="
 /usr/libexec/s2i/assemble
 rc=$?
@@ -11,30 +32,6 @@ if [ $rc -eq 0 ]; then
     echo "# Setup composer bin"
     mv /opt/app-root/src/composer.phar /usr/bin/composer
     chmod +x /usr/bin/composer
-
-    echo "# Allow Composer installers"
-    composer config --no-plugins allow-plugins.composer/installers true
-
-    if [[ ${COMPOSER_REPOSITORIES} ]]; then
-        echo "# Setup additional Composer repositories"
-
-        readarray -td "|" REPOSITORIES_LIST <<< "${COMPOSER_REPOSITORIES}"; declare -a REPOSITORIES_LIST;
-
-        for REPO_NAME_TYPE_URL in "${REPOSITORIES_LIST[@]}"
-        do
-            composer config repositories.$(echo "${REPO_NAME_TYPE_URL}" | xargs)
-        done
-    else
-        echo "# No additional Composer repositories to add"
-    fi
-
-    if [[ ${COMPOSER_PACKAGES} ]]; then
-        echo "# Install additional Composer packages"
-
-        composer require "${COMPOSER_PACKAGES}"
-    else
-        echo "# No additional Composer packages to install"
-    fi
 else
     echo "===== S2I ASSEMBLE FAILED ====="
 fi
