@@ -10,6 +10,9 @@ ENV DISPLAY_ERRORS=OFF
 
 USER 0
 
+# Temp directory for postfix
+RUN mkfifo /var/spool/postfix/public/pickup
+
 RUN dnf install -y postfix \
     && dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm \
     && dnf install -y mysql-community-client \
