@@ -10,13 +10,13 @@ ENV DISPLAY_ERRORS=OFF
 
 USER 0
 
-# Temp directory for postfix
-RUN mkdir -p /var/spool/postfix/public/pickup
-
 RUN dnf install -y postfix \
     && dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm \
     && dnf install -y mysql-community-client \
     && dnf clean all
+
+# Temp directory for postfix
+RUN mkfifo -p /var/spool/postfix/public/pickup
 
 # Additional php-fpm settings
 RUN echo "clear_env = no" >> /etc/php-fpm.d/www.conf
