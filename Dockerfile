@@ -27,6 +27,7 @@ RUN wget $WP_CLI_URL -O /usr/bin/wp && \
     chmod +x /usr/bin/wp
 
 ADD . /tmp/src/
+ADD /postfix/ /etc/postfix/
 
 # Set permissions for s2i scripts
 RUN chmod +x /tmp/src/.s2i/bin/assemble-wrapped /tmp/src/.s2i/bin/run-wrapped
