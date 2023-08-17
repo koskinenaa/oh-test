@@ -16,7 +16,7 @@ RUN dnf install -y postfix \
     && dnf clean all
 
 # Temp directory for postfix
-RUN mkfifo -p /var/spool/postfix/public/pickup
+RUN mkfifo /var/spool/postfix/public/pickup
 
 # Additional php-fpm settings
 RUN echo "clear_env = no" >> /etc/php-fpm.d/www.conf
