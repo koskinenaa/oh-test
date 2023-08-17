@@ -1,0 +1,32 @@
+# Set myhostname to the FQDN of your server
+#myhostname = your-server-name.example.com
+
+# Set the relay server's hostname and port
+relayhost = relay.hel.fi:25
+
+# Set the domain you want to append to outgoing mail
+#mydomain = example.com
+
+# Set the network interface addresses Postfix listens on
+inet_interfaces = all
+
+# Enable SASL authentication if required by the relay server
+#smtp_sasl_auth_enable = yes
+#smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+#smtp_sasl_security_options = noanonymous
+
+# TLS settings (if the relay server supports TLS)
+#smtp_use_tls = yes
+#smtp_tls_security_level = encrypt
+#smtp_tls_note_starttls_offer = yes
+#smtp_tls_CAfile = /etc/pki/tls/certs/ca-bundle.crt
+
+# Enable or disable local mail delivery
+#mydestination = localhost.$mydomain, localhost
+
+# Do not delay SMTP greeting for more stringent anti-spam checks
+#smtpd_banner = $myhostname ESMTP
+
+# Enable recipient address verification
+#disable_vrfy_command = yes
+#smtpd_recipient_restrictions = permit_mynetworks, reject_unauth_destination, reject_non_fqdn_recipient
