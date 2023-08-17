@@ -4,13 +4,14 @@ ARG WP_CLI_URL="https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp
 
 ENV PATH='/opt/app-root/src/bin:/opt/app-root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/app-root/src/vendor/bin'
 ENV AZURE_SQL_SSL_CA_PATH='/usr/local/share/ca-certificates/DigiCertGlobalRootCA.crt.pem'
-
 ENV COMPOSER_ALLOW_SUPERUSER=1
-
 ENV DISPLAY_ERRORS=OFF
 # ENV DOCUMENTROOT=/public
 
 USER 0
+
+# Update packages
+RUN dnf update -y
 
 # Additional php-fpm settings
 RUN echo "clear_env = no" >> /etc/php-fpm.d/www.conf
@@ -22,6 +23,9 @@ RUN mkdir -p /usr/local/share/ca-certificates && \
 # Install MySql
 RUN dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm && \
     dnf install -y mysql-community-client
+
+# Install Postfix
+RUN install -y postfix
 
 # WP CLI
 RUN wget $WP_CLI_URL -O /usr/bin/wp && \
