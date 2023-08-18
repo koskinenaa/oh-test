@@ -10,16 +10,9 @@ relayhost = relay.hel.fi:25
 # Set the network interface addresses Postfix listens on
 inet_interfaces = all
 
-# Enable SASL authentication if required by the relay server
-#smtp_sasl_auth_enable = yes
-#smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
-#smtp_sasl_security_options = noanonymous
-
-# TLS settings (if the relay server supports TLS)
-#smtp_use_tls = yes
-#smtp_tls_security_level = encrypt
+# TLS settings
+smtp_use_tls = yes
 #smtp_tls_note_starttls_offer = yes
-#smtp_tls_CAfile = /etc/pki/tls/certs/ca-bundle.crt
 
 # Enable or disable local mail delivery
 #mydestination = localhost.$mydomain, localhost
