@@ -40,6 +40,8 @@ RUN chgrp -R 0 /var/spool/postfix /var/lib/postfix && \
 # Remove part which runs file permission operations
 RUN sed -i '/mkdir -p ${PHP_FPM_RUN_DIR}/,/chown -R 1001:0 ${PHP_FPM_LOG_PATH}/d' /usr/libexec/s2i/run
 
+RUN /usr/sbin/postfix -c /etc/postfix start-cfg
+
 # Run those permission operations in Dockerfile instead
 RUN mkdir -p ${PHP_FPM_RUN_DIR} && \
     chmod -R a+rwx ${PHP_FPM_RUN_DIR} && \
