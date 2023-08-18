@@ -19,7 +19,7 @@ else
     echo "# Database tables available"
 fi
 
-echo "# Initialize postfix"
+echo "# Initializing postfix"
 postconf -e "always_add_missing_headers = no"
 postconf -e "maillog_file = /dev/stdout"
 postconf -e "myhostname = wp-openshift-test.dev.hel.ninja"
