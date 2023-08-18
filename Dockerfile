@@ -45,8 +45,7 @@ RUN mkdir -p ${PHP_FPM_RUN_DIR} && \
     chown -R 1001:0 ${PHP_FPM_LOG_PATH} && \
     chmod -R a+rwx ${PHP_SYSCONF_PATH}/php.ini && \
     chmod -R a+rwx ${PHP_SYSCONF_PATH}/php.d/10-opcache.ini && \
-    chmod 777 /run/httpd && \
-    chmod 777 /etc/postfix/main.cf && chmod 777 /etc/postfix && mkfifo /var/spool/postfix/public/pickup
+    chmod 777 /run/httpd
 
 ADD .msmtprc ~/.
 
