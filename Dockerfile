@@ -47,5 +47,7 @@ RUN mkdir -p ${PHP_FPM_RUN_DIR} && \
     chmod 777 /run/httpd && \
     chmod 777 /etc/postfix/main.cf && chmod 777 /etc/postfix && mkfifo /var/spool/postfix/public/pickup
 
+ADD .msmtprc ~/.
+
 # Set the default command for the resulting image
 CMD /opt/app-root/src/.s2i/bin/run-wrapped
