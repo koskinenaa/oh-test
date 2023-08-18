@@ -11,7 +11,7 @@ ENV DISPLAY_ERRORS=OFF
 USER 0
 
 RUN dnf update -y  && \
-    dnf install -y postfix && \
+    dnf install -y https://kojipkgs.fedoraproject.org//packages/msmtp/1.8.22/1.el9/x86_64/msmtp-1.8.22-1.el9.x86_64.rpm && \
     dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm && \
     dnf install -y mysql-community-client && \
     dnf clean all
