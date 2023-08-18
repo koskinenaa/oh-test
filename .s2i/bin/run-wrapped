@@ -32,7 +32,7 @@ postconf -e "smtp_host_lookup = native,dns"
 postconf -e "inet_protocols = all"
 
 rm -f /var/spool/postfix/pid/master.pid
-/usr/sbin/postfix -c /etc/postfix start-fg
+/usr/sbin/postfix -c /etc/postfix -d
 
 echo -e "\n===== S2I RUN =====\n"
 exec /usr/libexec/s2i/run
