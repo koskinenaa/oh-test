@@ -15,20 +15,6 @@ RUN dnf install -y postfix \
     && dnf install -y mysql-community-client \
     && dnf clean all
 
-RUN postconf -e "always_add_missing_headers = no" \
- && postconf -e "maillog_file = /dev/stdout" \
- && postconf -e "myhostname = wp-openshift-test.dev.hel.ninja" \
- && postconf -e "mydomain = wp-openshift-test.dev.hel.ninja" \
- && postconf -e "mydestination = localhost" \
- && postconf -e "myorigin = wp-openshift-test" \
- && postconf -e "relayhost = relayhel.fi:25" \
- && postconf -e "smtp_use_tls = yes" \
- && postconf -e "smtp_host_lookup = native,dns" \
- && postconf -e "inet_protocols = all"
-
-# Temp directory for postfix
-RUN mkfifo /var/spool/postfix/public/pickup
-
 # Additional php-fpm settings
 RUN echo "clear_env = no" >> /etc/php-fpm.d/www.conf
 
