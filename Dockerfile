@@ -11,12 +11,10 @@ ENV DISPLAY_ERRORS=OFF
 USER 0
 
 RUN dnf update -y  && \
-    dnf install -y https://kojipkgs.fedoraproject.org//packages/libntlm/1.6/4.el9/x86_64/libntlm-1.6-4.el9.x86_64.rpm && \
-    dnf install -y https://kojipkgs.fedoraproject.org//packages/libidn/1.38/4.el9/x86_64/libidn-1.38-4.el9.x86_64.rpm && \
-    dnf install -y https://kojipkgs.fedoraproject.org//packages/libgsasl/1.10.0/3.el9/x86_64/libgsasl-1.10.0-3.el9.x86_64.rpm && \
-    dnf install -y https://kojipkgs.fedoraproject.org//packages/msmtp/1.8.22/1.el9/x86_64/msmtp-1.8.22-1.el9.x86_64.rpm && \
+    dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
     dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm && \
     dnf install -y mysql-community-client && \
+    dnf install -y msmtp && \
     dnf clean all
 
 # Additional php-fpm settings
