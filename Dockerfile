@@ -10,13 +10,11 @@ ENV DISPLAY_ERRORS=OFF
 
 USER 0
 
-RUN dnf update -y \
-    && dnf install -y postfix \
-    && dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm \
-    && dnf install -y mysql-community-client \
-    && dnf clean all
-
-RUN chmod 777 /run/httpd
+RUN dnf update -y  && \
+    dnf install -y postfix && \
+    dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm && \
+    dnf install -y mysql-community-client && \
+    dnf clean all
 
 # Additional php-fpm settings
 RUN echo "clear_env = no" >> /etc/php-fpm.d/www.conf
@@ -31,17 +29,13 @@ RUN wget $WP_CLI_URL -O /usr/bin/wp && \
 
 ADD . /tmp/src/
 
-# Set permissions for s2i scripts
-RUN chmod +x /tmp/src/.s2i/bin/assemble-wrapped /tmp/src/.s2i/bin/run-wrapped
-# Set permissions to postfix directory so postconf command works during runtime
-RUN chmod 777 /etc/postfix/main.cf && chmod 777 /etc/postfix && mkfifo /var/spool/postfix/public/pickup
 # Install the dependencies
-RUN /tmp/src/.s2i/bin/assemble-wrapped
+RUN chmod +x /tmp/src/.s2i/bin/assemble-wrapped /tmp/src/.s2i/bin/run-wrapped && /tmp/src/.s2i/bin/assemble-wrapped
 
 # Remove part which runs file permission operations
 RUN sed -i '/mkdir -p ${PHP_FPM_RUN_DIR}/,/chown -R 1001:0 ${PHP_FPM_LOG_PATH}/d' /usr/libexec/s2i/run
 
-# Run those permission operations in Dockerfile instead
+# Set proper permissions
 RUN mkdir -p ${PHP_FPM_RUN_DIR} && \
     chmod -R a+rwx ${PHP_FPM_RUN_DIR} && \
     chown -R 1001:0 ${PHP_FPM_RUN_DIR} && \
@@ -49,7 +43,9 @@ RUN mkdir -p ${PHP_FPM_RUN_DIR} && \
     chmod -R a+rwx ${PHP_FPM_LOG_PATH} && \
     chown -R 1001:0 ${PHP_FPM_LOG_PATH} && \
     chmod -R a+rwx ${PHP_SYSCONF_PATH}/php.ini && \
-    chmod -R a+rwx ${PHP_SYSCONF_PATH}/php.d/10-opcache.ini
+    chmod -R a+rwx ${PHP_SYSCONF_PATH}/php.d/10-opcache.ini && \
+    chmod 777 /run/httpd && \
+    chmod 777 /etc/postfix/main.cf && chmod 777 /etc/postfix && mkfifo /var/spool/postfix/public/pickup
 
 # Set the default command for the resulting image
 CMD /opt/app-root/src/.s2i/bin/run-wrapped
