@@ -30,7 +30,8 @@ ADD . /tmp/src/
 
 # Set permissions for s2i scripts
 RUN chmod +x /tmp/src/.s2i/bin/assemble-wrapped /tmp/src/.s2i/bin/run-wrapped
-
+# Set permissions to postfix directory so postconf command works during runtime
+RUN chmod -R +w /etc/postfix/
 # Install the dependencies
 RUN /tmp/src/.s2i/bin/assemble-wrapped
 
