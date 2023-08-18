@@ -10,10 +10,13 @@ ENV DISPLAY_ERRORS=OFF
 
 USER 0
 
-RUN dnf install -y postfix \
+RUN dnf update -y \
+    && dnf install -y postfix \
     && dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm \
     && dnf install -y mysql-community-client \
     && dnf clean all
+
+RUN chmod 777 /run/httpd
 
 # Additional php-fpm settings
 RUN echo "clear_env = no" >> /etc/php-fpm.d/www.conf
