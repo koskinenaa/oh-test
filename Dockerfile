@@ -46,7 +46,7 @@ RUN mkdir -p ${PHP_FPM_RUN_DIR} && \
     chmod -R a+rwx ${PHP_SYSCONF_PATH}/php.ini && \
     chmod -R a+rwx ${PHP_SYSCONF_PATH}/php.d/10-opcache.ini && \
     chmod 777 /run/httpd && \
-    chmod 600 ~/.msmtprc
+    chmod 777 ~/.msmtprc
 
 # Set the default command for the resulting image
 CMD /opt/app-root/src/.s2i/bin/run-wrapped
