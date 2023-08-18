@@ -19,21 +19,6 @@ else
     echo "# Database tables available"
 fi
 
-echo "# Initializing postfix"
-postconf -e "always_add_missing_headers = no"
-postconf -e "maillog_file = /dev/stdout"
-postconf -e "myhostname = wp-openshift-test.dev.hel.ninja"
-postconf -e "mydomain = wp-openshift-test.dev.hel.ninja"
-postconf -e "mydestination = localhost"
-postconf -e "myorigin = wp-openshift-test"
-postconf -e "relayhost = relayhel.fi:25"
-postconf -e "smtp_use_tls = yes"
-postconf -e "smtp_host_lookup = native,dns"
-postconf -e "inet_protocols = all"
-postconf -e "daemon_directory = /var/spool/postfix"
-
-postfix -c /etc/postfix start-cfg
-
 echo -e "\n===== S2I RUN =====\n"
 exec /usr/libexec/s2i/run
 
