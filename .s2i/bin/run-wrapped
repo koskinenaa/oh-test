@@ -20,9 +20,9 @@ else
 fi
 
 echo "# Populating SMTP configuration variables"
-SMTP_HOST="${SMTP_HOST:=relay.hel.fi}"
-SMTP_HOST="${SMTP_PORT:=25}"
-SMTP_HOST="${SMTP_FROM:=noreply@hel.fi}"
+export SMTP_HOST="${SMTP_HOST:=relay.hel.fi}"
+export SMTP_PORT="${SMTP_PORT:=25}"
+export SMTP_FROM="${SMTP_FROM:=noreply@hel.fi}"
 envsubst < ~/.msmtprc > /tmp/.msmtprc_temp && mv /tmp/.msmtprc_temp ~/.msmtprc
 
 echo -e "\n===== S2I RUN =====\n"
