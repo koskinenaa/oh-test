@@ -49,11 +49,5 @@ RUN mkdir -p ${PHP_FPM_RUN_DIR} && \
     chmod 777 ~/.msmtprc && \
     touch /var/log/msmtp.log && chmod 777 /var/log/msmtp.log
 
-# PHP settings
-RUN sed -i 's|memory_limit = 128M|memory_limit = 256M|g' ${PHP_SYSCONF_PATH}/php.ini && \
-    sed -i 's|post_max_size = 200M|post_max_size = 20M|g' ${PHP_SYSCONF_PATH}/php.ini && \
-    sed -i 's|upload_max_filesize = 200M|upload_max_filesize = 20M|g' ${PHP_SYSCONF_PATH}/php.ini && \
-    sed -i 's|;error_log = syslog|error_log = /opt/app-root/src/wp-content/uploads/logs/error.log|g' ${PHP_SYSCONF_PATH}/php.ini
-
 # Set the default command for the resulting image
 CMD /opt/app-root/src/.s2i/bin/run-wrapped
