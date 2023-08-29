@@ -7,6 +7,12 @@ order deny,allow
 deny from all
 </Files>
 
+# Block file requests
+<filesMatch ".(htaccess|htpasswd|ini|log|sh)$">
+Order Allow,Deny
+Deny from all
+</filesMatch>
+
 # Block User Enumeration
 <IfModule mod_rewrite.c>
 RewriteCond %{QUERY_STRING} ^author=([0-9]*)
