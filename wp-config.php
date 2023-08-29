@@ -54,7 +54,7 @@ define( 'WP_MEMORY_LIMIT', getenv_docker('WORDPRESS_MEMORY_LIMIT', '256M') );
 
 define( 'WP_POST_REVISIONS', getenv_docker('WORDPRESS_POST_REVISIONS', 5) );
 
-define( 'DISALLOW_FILE_EDIT', getenv_docker('WORDPRESS_DISALLOW_FILE_EDIT', true) );
+define( 'DISALLOW_FILE_MODS', getenv_docker('WORDPRESS_DISALLOW_FILE_MODS', true) );
 
 define( 'IMAGE_EDIT_OVERWRITE', getenv_docker('WORDPRESS_IMAGE_EDIT_OVERWRITE', true) );
 
