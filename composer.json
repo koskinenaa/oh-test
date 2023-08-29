@@ -1,42 +1,26 @@
 {
     "name": "city-of-helsinki/wordpress",
     "type": "project",
-    "repositories": {
-        "wordpress-helfi-tpr": {
-            "type": "vcs",
-            "url": "https://github.com/City-of-Helsinki/wordpress-helfi-tpr"
-        },
-        "wordpress-helfi-chat": {
-            "type": "vcs",
-            "url": "https://github.com/City-of-Helsinki/wordpress-helfi-chat"
-        },
-        "wordpress-helfi-linkedevents": {
-            "type": "vcs",
-            "url": "https://github.com/City-of-Helsinki/wordpress-helfi-linkedevents"
-        },
-        "2": {
+    "repositories": [
+        {
             "type": "composer",
             "url": "https://wpackagist.org"
         },
-        "3": {
+        {
             "type": "vcs",
             "url": "https://github.com/City-of-Helsinki/wordpress-helfi-helsinkiteema.git"
         },
-        "4": {
+        {
             "type": "vcs",
             "url": "https://github.com/City-of-Helsinki/wordpress-helfi-hds-wp.git"
         }
-    },
+    ],
     "require": {
       "johnpbloch/wordpress-core-installer": "^2.0",
       "johnpbloch/wordpress-core": "*",
 
       "city-of-helsinki/wordpress-helfi-helsinkiteema": "*",
       "city-of-helsinki/wordpress-helfi-hds-wp": "*",
-
-      "city-of-helsinki/wordpress-helfi-linkedevents": "*",
-      "city-of-helsinki/wordpress-helfi-chat": "*",
-      "city-of-helsinki/wordpress-helfi-tpr": "*",
 
       "inpsyde/wp-translation-downloader": "^2.0"
     },
