@@ -36,6 +36,12 @@ RUN chmod +x /tmp/src/.s2i/bin/assemble-wrapped /tmp/src/.s2i/bin/run-wrapped &&
 # Remove part which runs file permission operations
 RUN sed -i '/mkdir -p ${PHP_FPM_RUN_DIR}/,/chown -R 1001:0 ${PHP_FPM_LOG_PATH}/d' /usr/libexec/s2i/run
 
+# PHP settings
+RUN sed -i 's|memory_limit = 128M|memory_limit = 256M|g' /etc/php.ini && \
+    sed -i 's|post_max_size = 200M|post_max_size = 20M|g' /etc/php.ini && \
+    sed -i 's|upload_max_filesize = 200M|upload_max_filesize = 20M|g' /etc/php.ini && \
+    sed -i 's|;error_log = syslog|error_log = /opt/app-root/src/wp-content/uploads/logs/error.log|g' /etc/php.ini
+
 # Set proper permissions
 RUN mkdir -p ${PHP_FPM_RUN_DIR} && \
     chmod -R a+rwx ${PHP_FPM_RUN_DIR} && \
