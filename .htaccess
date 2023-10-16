@@ -25,7 +25,7 @@ RewriteEngine On
 
 # if WORDPRESS_REDIRECT_TO_PRIMARY_ROUTE is set to "True", redirect all to primary domain
 RewriteCond %{ENV:WORDPRESS_REDIRECT_TO_PRIMARY_ROUTE} ^true$
-RewriteCond %{ENV:WORDPRESS_SITE_URL} !%{HTTP_HOST} [NC]
+RewriteCond %{ENV:WORDPRESS_SITE_URL} !https://portaali202310041helfi.dev.hel.ninja [NC]
 RewriteRule ^(.*)$ %{ENV:WORDPRESS_SITE_URL}/$1 [L,R=302]
 
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
