@@ -23,10 +23,11 @@ RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI}/? [L,R=302]
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
-# if WORDPRESS_REDIRECT_TO_PRIMARY_ROUTE is set to "true", redirect all to primary domain
+# if WORDPRESS_REDIRECT_TO_PRIMARY_ROUTE is set to "True", redirect all to primary domain
+SetEnv SCHEME_AND_DOMAIN "%{REQUEST_SCHEME}://%{HTTP_HOST}"
 RewriteCond %{ENV:WORDPRESS_REDIRECT_TO_PRIMARY_ROUTE} ^true$
-RewriteCond %{HTTP_HOST} !^%{ENV:WORDPRESS_PRIMARY_ROUTE}$ [NC]
-RewriteRule ^(.*)$ https://%{ENV:WORDPRESS_PRIMARY_ROUTE}/$1 [L,R=301]
+RewriteCond %{ENV:MY_SCHEME_AND_DOMAIN} !^%{ENV:WORDPRESS_SITE_URL}$ [NC]
+RewriteRule ^(.*)$ %{ENV:WORDPRESS_SITE_URL}/$1 [L,R=301]
 
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 RewriteBase /
