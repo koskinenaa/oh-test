@@ -25,6 +25,9 @@ export SMTP_PORT="${SMTP_PORT:=25}"
 export SMTP_FROM="${SMTP_FROM:=noreply@hel.fi}"
 envsubst < ~/.msmtprc > /tmp/.msmtprc_temp && mv /tmp/.msmtprc_temp ~/.msmtprc
 
+echo "# Populating WORDPRESS_SITE_URL in .htaccess file"
+envsubst '$WORDPRESS_SITE_URL' < ~/.htaccess > /tmp/.htaccess && mv /tmp/.htaccess ~/.htaccess
+
 echo -e "\n===== S2I RUN =====\n"
 exec /usr/libexec/s2i/run
 
