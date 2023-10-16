@@ -25,7 +25,7 @@ RewriteEngine On
 
 # if WORDPRESS_REDIRECT_TO_PRIMARY_ROUTE is set to "True", redirect all to primary domain
 RewriteCond %{ENV:WORDPRESS_REDIRECT_TO_PRIMARY_ROUTE} ^true$
-RewriteCond https://%{HTTP_HOST} !^%{ENV:WORDPRESS_SITE_URL}$ [NC]
+RewriteCond https://%{HTTP_HOST} !%{ENV:WORDPRESS_SITE_URL}$ [NC]
 RewriteRule ^(.*)$ %{ENV:WORDPRESS_SITE_URL}/$1 [L,R=302]
 
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
