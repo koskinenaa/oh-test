@@ -25,6 +25,12 @@ export SMTP_PORT="${SMTP_PORT:=25}"
 export SMTP_FROM="${SMTP_FROM:=noreply@hel.fi}"
 envsubst < ~/.msmtprc > /tmp/.msmtprc_temp && mv /tmp/.msmtprc_temp ~/.msmtprc
 
+echo "# Delete default WP plugins"
+wp plugin delete akismet hello
+
+echo "# Delete default WP themes"
+wp theme twentytwentyone twentytwentytwo
+
 echo -e "\n===== S2I RUN =====\n"
 exec /usr/libexec/s2i/run
 
