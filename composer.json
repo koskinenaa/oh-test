@@ -32,6 +32,7 @@
     },
     "extra": {
       "wordpress-install-dir": "/opt/app-root/src",
+      "mu-require-file": "wp-muplugin-loader.php",
   	  "installer-paths": {
   	    "wp-content/plugins/{$name}": [
   	      "type:wordpress-plugin"
