@@ -21,13 +21,11 @@ if [ $rc -eq 0 ]; then
     if [[ ${COMPOSER_REPOSITORIES} ]]; then
         echo "# Setup additional Composer repositories"
 
-        echo "${COMPOSER_AUTH}" > /opt/app-root/src/auth.json
-
         readarray -td "|" REPOSITORIES_LIST <<< "${COMPOSER_REPOSITORIES}"; declare -a REPOSITORIES_LIST;
 
         for REPO_NAME_TYPE_URL in "${REPOSITORIES_LIST[@]}"
         do
-            yes | composer config repositories.$(echo "${REPO_NAME_TYPE_URL}" | xargs)
+            composer config repositories.$(echo "${REPO_NAME_TYPE_URL}" | xargs)
         done
     else
         echo "# No additional Composer repositories to add"
@@ -36,7 +34,7 @@ if [ $rc -eq 0 ]; then
     if [[ ${COMPOSER_PACKAGES} ]]; then
         echo "# Install additional Composer packages"
 
-        composer require -n ${COMPOSER_PACKAGES}
+        composer require ${COMPOSER_PACKAGES}
     else
         echo "# No additional Composer packages to install"
     fi
