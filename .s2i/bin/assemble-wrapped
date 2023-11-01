@@ -34,7 +34,7 @@ if [ $rc -eq 0 ]; then
     if [[ ${COMPOSER_PACKAGES} ]]; then
         echo "# Install additional Composer packages"
 
-        yes | composer require ${COMPOSER_PACKAGES}
+        composer require -n ${COMPOSER_PACKAGES}
     else
         echo "# No additional Composer packages to install"
     fi
