@@ -21,6 +21,8 @@ if [ $rc -eq 0 ]; then
     if [[ ${COMPOSER_REPOSITORIES} ]]; then
         echo "# Setup additional Composer repositories"
 
+        echo "${COMPOSER_AUTH}" > /opt/app-root/src/auth.json
+
         readarray -td "|" REPOSITORIES_LIST <<< "${COMPOSER_REPOSITORIES}"; declare -a REPOSITORIES_LIST;
 
         for REPO_NAME_TYPE_URL in "${REPOSITORIES_LIST[@]}"
