@@ -41,6 +41,11 @@ define( 'LOGGED_IN_SALT',   getenv_docker('WORDPRESS_LOGGED_IN_SALT',   'put you
 define( 'NONCE_SALT',       getenv_docker('WORDPRESS_NONCE_SALT',       'put your unique phrase here') );
 
 /**
+  * Filesystem
+  */
+define( 'FS_METHOD', getenv_docker('WORDPRESS_DB_COLLATE', 'direct') );
+
+/**
   * Debug
   */
 define( 'WP_DEBUG', !!getenv_docker('WORDPRESS_DEBUG', '') );
