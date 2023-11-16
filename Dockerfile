@@ -15,6 +15,7 @@ RUN dnf update -y  && \
     dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm && \
     dnf install -y mysql-community-client && \
     dnf install -y msmtp && \
+    dnf install -y jq && \
     dnf clean all
 
 # Additional php-fpm settings
