@@ -27,11 +27,7 @@ envsubst < ~/.msmtprc > /tmp/.msmtprc_temp && mv /tmp/.msmtprc_temp ~/.msmtprc
 
 echo "# Generating Apache httpd redirects"
 sh ~/utils/generate_redirects.sh /tmp/redirections.conf
-# Add generated redirects to front of file and then rest of redirections
-cat /tmp/redirections.conf | echo "" | cat /opt/app-root/src/httpd-cfg/redirects.conf > /opt/app-root/src/httpd-cfg/redirects.conf_new
-mv /opt/app-root/src/httpd-cfg/redirects.conf_new /opt/app-root/src/httpd-cfg/redirects.conf
-# cleanup
-rm /tmp/redirections.conf
+export PARSED_REDIRECTS=$(cat /tmp/redirections.conf)
 
 echo "# Delete default WP plugins"
 wp plugin delete akismet hello
