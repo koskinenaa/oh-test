@@ -9,8 +9,8 @@ Options -Indexes
 
 # Block file requests
 <filesMatch ".(htaccess|htpasswd|ini|log|sh)$">
-order deny,allow
-deny from all
+  order deny,allow
+  deny from all
 </filesMatch>
 
 # Block User Enumeration
@@ -21,13 +21,13 @@ deny from all
 
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
-RewriteEngine On
-
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-RewriteBase /
-RewriteRule ^index\.php$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
+  RewriteEngine On
+  
+  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+  RewriteBase /
+  RewriteRule ^index\.php$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.php [L]
 </IfModule>
 # END
