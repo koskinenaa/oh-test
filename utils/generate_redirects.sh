@@ -10,6 +10,9 @@ fi
 # Clean any existing redirects
 rm $output
 
+echo "RewriteEngine On" >> $1
+echo "SSLProxyEngine on" >> $1
+
 readarray -t redirects < <(echo $WORDPRESS_REDIRECTS | jq -c '.redirects[]')
 
 for i in "${redirects[@]}"; do
