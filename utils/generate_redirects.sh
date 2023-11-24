@@ -12,6 +12,7 @@ rm $output
 
 echo "RewriteEngine On" >> $1
 echo "SSLProxyEngine on" >> $1
+echo "# --- Generated Redirects --- " >> $1
 
 readarray -t redirects < <(echo $WORDPRESS_REDIRECTS | jq -c '.redirects[]')
 
