@@ -26,12 +26,12 @@ export SMTP_FROM="${SMTP_FROM:=noreply@hel.fi}"
 envsubst < ~/.msmtprc > /tmp/.msmtprc_temp && mv /tmp/.msmtprc_temp ~/.msmtprc
 
 echo "# Generating Apache httpd redirects"
-sh ~/utils/generate_redirects.sh /tmp/redirections.conf
-cat /tmp/redirections.conf >> /opt/app-root/src/httpd-cfg/redirects.conf_new
-echo "" >> /opt/app-root/src/httpd-cfg/redirects.conf_new
-cat /opt/app-root/src/httpd-cfg/redirects.conf >> /opt/app-root/src/httpd-cfg/redirects.conf_new
-mv /opt/app-root/src/httpd-cfg/redirects.conf_new /opt/app-root/src/httpd-cfg/redirects.conf
-rm /tmp/redirections.conf
+# Generate redirects from WORDPRESS_REDIRECTS variable
+sh ~/utils/generate_redirects.sh /opt/app-root/src/httpd-cfg/redirects.conf_generated
+# Append new redirect configuration with current configuration
+cat /opt/app-root/src/httpd-cfg/redirects.conf >> /opt/app-root/src/httpd-cfg/redirects.conf_generated
+# Move new redirect configuration in place of current one
+mv /opt/app-root/src/httpd-cfg/redirects.conf_generated /opt/app-root/src/httpd-cfg/redirects.conf
 
 echo "# Delete default WP plugins"
 wp plugin delete akismet hello
