@@ -21,7 +21,6 @@
       "inpsyde/wp-translation-downloader": "^2.0"
     },
     "config": {
-      "cache-dir": "/tmp/.cache",
       "optimize-autoloader": true,
       "preferred-install": "dist",
       "allow-plugins": {
