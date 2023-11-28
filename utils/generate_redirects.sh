@@ -33,7 +33,7 @@ for i in "${redirects[@]}"; do
     echo "RewriteCond %{HTTP_HOST} ${source_host//\"} [NC]" >> $1
   fi
 
-  echo "RewriteRule ^${source_path//\"}\$ $target_url [R=301,L]" >> $1
+  echo "RewriteRule ^${source_path//\"}\$ $target_url [R=302,L]" >> $1
 
   unset source_url
   unset source_host
