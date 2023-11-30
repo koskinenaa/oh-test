@@ -48,7 +48,8 @@ RUN mkdir -p ${PHP_FPM_RUN_DIR} && \
     chmod -R a+rwx ${PHP_SYSCONF_PATH}/php.d/10-opcache.ini && \
     chmod 777 /run/httpd && \
     chmod 777 ~/.msmtprc && \
-    touch /var/log/msmtp.log && chmod 777 /var/log/msmtp.log
+    touch /var/log/msmtp.log && chmod 777 /var/log/msmtp.log && \
+    chmod a+w -R /opt/app-root/src/.cache/
 
 # Set the default command for the resulting image
 CMD /opt/app-root/src/.s2i/bin/run-wrapped
