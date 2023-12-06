@@ -16,11 +16,11 @@ RUN dnf update -y && \
     && dnf install -y mysql-community-client \
                       msmtp \
                       jq \
-                      clamdscan \
+                      clamav \
     && dnf clean all
 
 # Remove unwanted ClamAV components
-RUN dnf remove -y clamav clamav-daemon clamav-freshclam && \
+RUN dnf remove -y clamd && \
     dnf clean all
 
 # Additional php-fpm settings
