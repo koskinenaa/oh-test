@@ -16,6 +16,7 @@ RUN dnf update -y  && \
     dnf install -y mysql-community-client && \
     dnf install -y msmtp && \
     dnf install -y jq && \
+    dnf install -y clamav clamav-update && \
     dnf clean all
 
 # Additional php-fpm settings
