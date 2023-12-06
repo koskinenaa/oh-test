@@ -10,13 +10,17 @@ ENV DISPLAY_ERRORS=OFF
 
 USER 0
 
-RUN dnf update -y  && \
-    dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
-    dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm && \
-    dnf install -y mysql-community-client && \
-    dnf install -y msmtp && \
-    dnf install -y jq && \
-    dnf install -y clamav clamav-update && \
+RUN dnf update -y && \
+    dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm \
+                   https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm \
+                   mysql-community-client \
+                   msmtp \
+                   jq \
+                   clamdscan \
+    && dnf clean all
+
+# Remove unwanted ClamAV components
+RUN dnf remove -y clamav clamav-daemon clamav-freshclam && \
     dnf clean all
 
 # Additional php-fpm settings
