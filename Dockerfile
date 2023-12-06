@@ -11,6 +11,7 @@ ENV DISPLAY_ERRORS=OFF
 USER 0
 
 RUN dnf update -y  && \
+    dnf install -y epel-release && \
     dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
     dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm && \
     dnf install -y mysql-community-client && \
