@@ -23,6 +23,9 @@ RUN dnf update -y && \
 RUN dnf remove -y clamd && \
     dnf clean all
 
+# ClamAV configuration
+COPY /clamav/scan.conf /etc/clamd.d/scan.conf
+
 # Additional php-fpm settings
 RUN echo "clear_env = no" >> /etc/php-fpm.d/www.conf
 
