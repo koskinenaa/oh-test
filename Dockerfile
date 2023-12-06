@@ -13,10 +13,10 @@ USER 0
 RUN dnf update -y && \
     dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm \
                    https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm \
-                   mysql-community-client \
-                   msmtp \
-                   jq \
-                   clamdscan \
+    && dnf install -y mysql-community-client \
+                      msmtp \
+                      jq \
+                      clamdscan \
     && dnf clean all
 
 # Remove unwanted ClamAV components
