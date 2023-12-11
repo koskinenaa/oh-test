@@ -15,9 +15,6 @@
       "johnpbloch/wordpress-core-installer": "^2.0",
       "johnpbloch/wordpress-core": "*",
 
-      "boxuk/wp-muplugin-loader": "^2.0",
-      "city-of-helsinki/wordpress-helfi-site-core": "*",
-
       "inpsyde/wp-translation-downloader": "^2.0"
     },
     "config": {
