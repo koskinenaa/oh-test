@@ -49,7 +49,7 @@ RUN mkdir -p ${PHP_FPM_RUN_DIR} && \
     chmod 777 /run/httpd && \
     chmod 777 ~/.msmtprc && \
     touch /var/log/msmtp.log && chmod 777 /var/log/msmtp.log && \
-    chmod a+w -R /opt/app-root/src/.cache/composer
+    chmod a+w -R /opt/app-root/src/.cache
 
 # Set the default command for the resulting image
 CMD /opt/app-root/src/.s2i/bin/run-wrapped
