@@ -29,6 +29,8 @@
         "boxuk/wp-muplugin-loader": true
       }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
       "wordpress-install-dir": "/opt/app-root/src",
       "mu-require-file": "wp-muplugin-loader.php",
