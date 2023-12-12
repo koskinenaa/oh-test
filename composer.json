@@ -21,7 +21,7 @@
     },
     "config": {
       "optimize-autoloader": true,
-      "preferred-install": "dist",
+      "preferred-install": "auto",
       "allow-plugins": {
         "composer/installers": true,
         "johnpbloch/wordpress-core-installer": true,
