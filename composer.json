@@ -12,6 +12,7 @@
         }
     ],
     "require": {
+      "composer/installers": "^2.2",
       "johnpbloch/wordpress-core-installer": "^2.0",
       "johnpbloch/wordpress-core": "*",
       
