@@ -8,14 +8,19 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/City-of-Helsinki/wordpress-helfi-site-core.git"
+            "url": "https://github.com/City-of-Helsinki/wordpress-helfi-site-core"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/City-of-Helsinki/wordpress-helfi-mu-autoloader"
         }
     ],
     "require": {
       "composer/installers": "^2.2",
       "johnpbloch/wordpress-core-installer": "^2.0",
       "johnpbloch/wordpress-core": "*",
-      
+
+      "city-of-helsinki/wp-mu-autoloader": "^1.0",
       "city-of-helsinki/wordpress-helfi-site-core": "*",
 
       "inpsyde/wp-translation-downloader": "^2.0"
@@ -36,15 +41,18 @@
       "wordpress-install-dir": "/opt/app-root/src",
       "mu-require-file": "wp-muplugin-loader.php",
   	  "installer-paths": {
-  	    "wp-content/plugins/{$name}": [
-  	      "type:wordpress-plugin"
-  	    ],
-  	    "wp-content/mu-plugins/{$name}": [
-  	      "type:wordpress-muplugin"
-  	    ],
-  	    "wp-content/themes/{$name}": [
-  	      "type:wordpress-theme"
-  	    ]
+        "wp-content/mu-plugins": [
+            "city-of-helsinki/wp-mu-autoloader"
+        ],
+        "wp-content/mu-plugins/{$name}": [
+            "type:wordpress-muplugin"
+        ],
+        "wp-content/plugins/{$name}": [
+            "type:wordpress-plugin"
+        ],
+        "wp-content/themes/{$name}": [
+            "type:wordpress-theme"
+        ]
   	  },
       "wp-translation-downloader": {
         "languages": [
