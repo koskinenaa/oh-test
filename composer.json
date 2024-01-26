@@ -13,6 +13,14 @@
         {
             "type": "vcs",
             "url": "https://github.com/City-of-Helsinki/wordpress-helfi-mu-autoloader"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/City-of-Helsinki/wordpress-helfi-hds-wp.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/City-of-Helsinki/wordpress-helfi-helsinkiteema.git"
         }
     ],
     "require": {
