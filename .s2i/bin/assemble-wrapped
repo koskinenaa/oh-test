@@ -25,11 +25,13 @@ if [ ${S2I_ASSEMBLE_SUCCESS} -eq 0 ]; then
 
         for REPO_NAME_TYPE_URL in "${REPOSITORIES_LIST[@]}"
         do
-            composer config repositories.$(echo "${REPO_NAME_TYPE_URL}" | xargs)
+            composer config repositories.$(echo "${REPO_NAME_TYPE_URL}" | xargs) 1> /dev/null 2> /dev/null
             REPOSITORY_ADDED=$?
 
             if [ ${REPOSITORY_ADDED} -ne 0 ]; then
-                echo "# Failed to add '${REPO_NAME_TYPE_URL}' to Composer repositories config."
+                echo "# Failed to add repository to Composer config:"
+                echo "${REPO_NAME_TYPE_URL}"
+
                 exit ${REPOSITORY_ADDED}
             fi
         done
@@ -44,7 +46,8 @@ if [ ${S2I_ASSEMBLE_SUCCESS} -eq 0 ]; then
         PACKAGES_INSTALLED=$?
 
         if [ ${PACKAGES_INSTALLED} -ne 0 ]; then
-            echo "# Failed to require Composer packages: ${COMPOSER_PACKAGES}."
+            echo "# Failed to require Composer packages:"
+            echo ${COMPOSER_PACKAGES} | tr ' ' '\n'
 
             exit ${PACKAGES_INSTALLED}
         fi
