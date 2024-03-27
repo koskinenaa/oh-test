@@ -6,9 +6,9 @@ cp /tmp/src/composer.json /tmp/composer.json.bak
 
 echo -e "\n===== S2I ASSEMBLE =====\n"
 /usr/libexec/s2i/assemble
-rc=$?
+S2I_ASSEMBLE_SUCCESS=$?
 
-if [ $rc -eq 0 ]; then
+if [ ${S2I_ASSEMBLE_SUCCESS} -eq 0 ]; then
     echo -e "\n===== S2I ASSEMBLE SUCCESSFUL =====\n"
 
     echo "# Restore composer.json"
@@ -26,6 +26,12 @@ if [ $rc -eq 0 ]; then
         for REPO_NAME_TYPE_URL in "${REPOSITORIES_LIST[@]}"
         do
             composer config repositories.$(echo "${REPO_NAME_TYPE_URL}" | xargs)
+            REPOSITORY_ADDED=$?
+
+            if [ ${REPOSITORY_ADDED} -ne 0 ]; then
+                echo "# Failed to add '${REPO_NAME_TYPE_URL}' to Composer repositories config."
+                exit ${REPOSITORY_ADDED}
+            fi
         done
     else
         echo "# No additional Composer repositories to add"
@@ -35,6 +41,13 @@ if [ $rc -eq 0 ]; then
         echo "# Install additional Composer packages"
 
         composer require ${COMPOSER_PACKAGES}
+        PACKAGES_INSTALLED=$?
+
+        if [ ${PACKAGES_INSTALLED} -ne 0 ]; then
+            echo "# Failed to require Composer packages: ${COMPOSER_PACKAGES}."
+
+            exit ${PACKAGES_INSTALLED}
+        fi
     else
         echo "# No additional Composer packages to install"
     fi
@@ -44,4 +57,4 @@ fi
 
 echo -e "\n===== S2I ASSEMBLE READY =====\n"
 
-exit $rc
+exit ${S2I_ASSEMBLE_SUCCESS}
