@@ -25,6 +25,10 @@ define( 'WP_ENVIRONMENT_TYPE', getenv_docker( 'WORDPRESS_ENVIRONMENT', 'producti
   */
 define( 'WP_CACHE', !!getenv_docker( 'WORDPRESS_CACHE', '' ) );
 
+if ( getenv_docker( 'WORDPRESS_CACHE_DIR', '' ) ) {
+	define( 'CACHE_ENABLER_CACHE_DIR', getenv_docker( 'WORDPRESS_CACHE_DIR', '' ) );
+}
+
 /**
   * Database
   */
