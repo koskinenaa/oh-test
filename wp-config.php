@@ -16,6 +16,11 @@ if (!function_exists('getenv_docker')) {
 }
 
 /**
+  * Environment
+  */
+define( 'WP_ENVIRONMENT_TYPE', getenv_docker( 'WORDPRESS_ENVIRONMENT', 'production' ) );
+
+/**
   * Database
   */
 define( 'DB_NAME', getenv_docker( 'WORDPRESS_DB_NAME', 'wordpress' ) );
