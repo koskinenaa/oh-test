@@ -21,6 +21,11 @@ if (!function_exists('getenv_docker')) {
 define( 'WP_ENVIRONMENT_TYPE', getenv_docker( 'WORDPRESS_ENVIRONMENT', 'production' ) );
 
 /**
+  * Cache
+  */
+define( 'WP_CACHE', !!getenv_docker( 'WORDPRESS_CACHE', '' ) );
+
+/**
   * Database
   */
 define( 'DB_NAME', getenv_docker( 'WORDPRESS_DB_NAME', 'wordpress' ) );
