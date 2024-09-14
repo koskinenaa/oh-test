@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$cache_enabler_constants_file = WP_PLUGIN_DIR . '/cache-enabler/constants.php';
+$cache_enabler_constants_file = realpath(__DIR__) . '/plugins/cache-enabler/constants.php';
 
 if ( file_exists( $cache_enabler_constants_file ) ) {
     require $cache_enabler_constants_file;
