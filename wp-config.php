@@ -1,84 +1,99 @@
 <?php
-// a helper function to lookup "env_FILE", "env", then fallback
-if (!function_exists('getenv_docker')) {
-	// https://github.com/docker-library/wordpress/issues/588 (WP-CLI will load this file 2x)
-	function getenv_docker($env, $default) {
-		if ($fileEnv = getenv($env . '_FILE')) {
-			return rtrim(file_get_contents($fileEnv), "\r\n");
-		}
-		else if (($val = getenv($env)) !== false) {
-			return $val;
-		}
-		else {
+
+if ( ! function_exists( 'get_env_value' ) ) {
+	function get_env_value( string $key, $default ) {
+		$value = getenv( $key );
+
+		return ( false !== $value ) ? $value : $default;
+	}
+}
+
+if ( ! function_exists( 'get_bool_env_value' ) ) {
+	function get_bool_env_value( string $key, bool $default ): bool {
+		$value = getenv( $key );
+
+		if ( is_int( $value ) ) {
+			return (bool) $value;
+		} else if ( is_string( $value ) ) {
+			return filter_var( strtolower( $value ), FILTER_VALIDATE_BOOLEAN );
+		} else {
 			return $default;
 		}
+	}
+}
+
+if ( ! function_exists( 'get_int_env_value' ) ) {
+	function get_int_env_value( string $key, int $default ): int {
+		$value = getenv( $key );
+
+		return is_numeric( $value ) ? intval( $value ) : $default;
 	}
 }
 
 /**
   * Environment
   */
-define( 'WP_ENVIRONMENT_TYPE', getenv_docker( 'WORDPRESS_ENVIRONMENT', 'production' ) );
+define( 'WP_ENVIRONMENT_TYPE', get_env_value( 'WORDPRESS_ENVIRONMENT', 'production' ) );
 
 /**
   * Cache
   */
-define( 'WP_CACHE', boolval( getenv_docker( 'WORDPRESS_CACHE', false ) ) );
+define( 'WP_CACHE', get_bool_env_value( 'WORDPRESS_CACHE', false ) );
 
-if ( getenv_docker( 'WORDPRESS_CACHE_DIR', '' ) ) {
-	define( 'CACHE_ENABLER_CACHE_DIR', getenv_docker( 'WORDPRESS_CACHE_DIR', '' ) );
+if ( get_env_value( 'WORDPRESS_CACHE_DIR', '' ) ) {
+	define( 'CACHE_ENABLER_CACHE_DIR', get_env_value( 'WORDPRESS_CACHE_DIR', '' ) );
 }
 
 /**
   * Database
   */
-define( 'DB_NAME', getenv_docker( 'WORDPRESS_DB_NAME', 'wordpress' ) );
-define( 'DB_USER', getenv_docker( 'WORDPRESS_DB_USER', 'example username' ) );
-define( 'DB_PASSWORD', getenv_docker( 'WORDPRESS_DB_PASSWORD', 'example password' ) );
-define( 'DB_HOST', getenv_docker( 'WORDPRESS_DB_HOST', 'mysql' ) );
-define( 'DB_CHARSET', getenv_docker( 'WORDPRESS_DB_CHARSET', 'utf8' ) );
-define( 'DB_COLLATE', getenv_docker( 'WORDPRESS_DB_COLLATE', '' ) );
+define( 'DB_NAME', get_env_value( 'WORDPRESS_DB_NAME', 'wordpress' ) );
+define( 'DB_USER', get_env_value( 'WORDPRESS_DB_USER', 'example username' ) );
+define( 'DB_PASSWORD', get_env_value( 'WORDPRESS_DB_PASSWORD', 'example password' ) );
+define( 'DB_HOST', get_env_value( 'WORDPRESS_DB_HOST', 'mysql' ) );
+define( 'DB_CHARSET', get_env_value( 'WORDPRESS_DB_CHARSET', 'utf8' ) );
+define( 'DB_COLLATE', get_env_value( 'WORDPRESS_DB_COLLATE', '' ) );
 define( 'MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL );
 
-$table_prefix = getenv_docker( 'WORDPRESS_TABLE_PREFIX', 'wp_' );
+$table_prefix = get_env_value( 'WORDPRESS_TABLE_PREFIX', 'wp_' );
 
 /**
   * Authentication unique keys and salts.
   */
-define( 'AUTH_KEY',         getenv_docker( 'WORDPRESS_AUTH_KEY',         'put your unique phrase here' ) );
-define( 'SECURE_AUTH_KEY',  getenv_docker( 'WORDPRESS_SECURE_AUTH_KEY',  'put your unique phrase here' ) );
-define( 'LOGGED_IN_KEY',    getenv_docker( 'WORDPRESS_LOGGED_IN_KEY',    'put your unique phrase here' ) );
-define( 'NONCE_KEY',        getenv_docker( 'WORDPRESS_NONCE_KEY',        'put your unique phrase here' ) );
-define( 'AUTH_SALT',        getenv_docker( 'WORDPRESS_AUTH_SALT',        'put your unique phrase here' ) );
-define( 'SECURE_AUTH_SALT', getenv_docker( 'WORDPRESS_SECURE_AUTH_SALT', 'put your unique phrase here' ) );
-define( 'LOGGED_IN_SALT',   getenv_docker( 'WORDPRESS_LOGGED_IN_SALT',   'put your unique phrase here' ) );
-define( 'NONCE_SALT',       getenv_docker( 'WORDPRESS_NONCE_SALT',       'put your unique phrase here' ) );
+define( 'AUTH_KEY',         get_env_value( 'WORDPRESS_AUTH_KEY',         'put your unique phrase here' ) );
+define( 'SECURE_AUTH_KEY',  get_env_value( 'WORDPRESS_SECURE_AUTH_KEY',  'put your unique phrase here' ) );
+define( 'LOGGED_IN_KEY',    get_env_value( 'WORDPRESS_LOGGED_IN_KEY',    'put your unique phrase here' ) );
+define( 'NONCE_KEY',        get_env_value( 'WORDPRESS_NONCE_KEY',        'put your unique phrase here' ) );
+define( 'AUTH_SALT',        get_env_value( 'WORDPRESS_AUTH_SALT',        'put your unique phrase here' ) );
+define( 'SECURE_AUTH_SALT', get_env_value( 'WORDPRESS_SECURE_AUTH_SALT', 'put your unique phrase here' ) );
+define( 'LOGGED_IN_SALT',   get_env_value( 'WORDPRESS_LOGGED_IN_SALT',   'put your unique phrase here' ) );
+define( 'NONCE_SALT',       get_env_value( 'WORDPRESS_NONCE_SALT',       'put your unique phrase here' ) );
 
 /**
   * Filesystem
   */
-define( 'FS_METHOD', getenv_docker( 'WORDPRESS_DB_COLLATE', 'direct' ) );
+define( 'FS_METHOD', get_env_value( 'WORDPRESS_DB_COLLATE', 'direct' ) );
 
 /**
   * Debug
   */
-define( 'WP_DEBUG', !!getenv_docker( 'WORDPRESS_DEBUG', '' ) );
-define( 'WP_DEBUG_LOG', !!getenv_docker( 'WORDPRESS_DEBUG_LOG', '' ) );
-define( 'WP_DEBUG_DISPLAY', !!getenv_docker( 'WORDPRESS_DEBUG_DISPLAY', '' ) );
+define( 'WP_DEBUG', get_bool_env_value( 'WORDPRESS_DEBUG', false ) );
+define( 'WP_DEBUG_LOG', get_bool_env_value( 'WORDPRESS_DEBUG_LOG', false ) );
+define( 'WP_DEBUG_DISPLAY', get_bool_env_value( 'WORDPRESS_DEBUG_DISPLAY', false ) );
 
 /**
   * WordPress settings
   */
-define( 'WP_MEMORY_LIMIT', getenv_docker( 'WORDPRESS_MEMORY_LIMIT', '256M' ) );
+define( 'WP_MEMORY_LIMIT', get_env_value( 'WORDPRESS_MEMORY_LIMIT', '256M' ) );
 
-define( 'WP_POST_REVISIONS', getenv_docker( 'WORDPRESS_POST_REVISIONS', 5 ) );
+define( 'WP_POST_REVISIONS', get_int_env_value( 'WORDPRESS_POST_REVISIONS', 5 ) );
 
-define( 'DISALLOW_FILE_MODS', getenv_docker( 'WORDPRESS_DISALLOW_FILE_MODS', true ) );
+define( 'DISALLOW_FILE_MODS', get_bool_env_value( 'WORDPRESS_DISALLOW_FILE_MODS', true ) );
 
-define( 'IMAGE_EDIT_OVERWRITE', getenv_docker( 'WORDPRESS_IMAGE_EDIT_OVERWRITE', true ) );
+define( 'IMAGE_EDIT_OVERWRITE', get_bool_env_value( 'WORDPRESS_IMAGE_EDIT_OVERWRITE', true ) );
 
-define( 'WP_CRON_LOCK_TIMEOUT', getenv_docker( 'WORDPRESS_CRON_LOCK_TIMEOUT', 300 ) );
-define( 'DISABLE_WP_CRON', getenv_docker( 'WORDPRESS_DISABLE_CRON', true ) );
+define( 'WP_CRON_LOCK_TIMEOUT', get_int_env_value( 'WORDPRESS_CRON_LOCK_TIMEOUT', 60 ) );
+define( 'DISABLE_WP_CRON', get_bool_env_value( 'WORDPRESS_DISABLE_CRON', true ) );
 
 // If we're behind a proxy server and using HTTPS, we need to alert WordPress of that fact
 // see also https://wordpress.org/support/article/administration-over-ssl/#using-a-reverse-proxy
