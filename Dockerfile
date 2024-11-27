@@ -19,7 +19,8 @@ RUN dnf update -y  && \
     dnf clean all
 
 # Additional php-fpm settings
-RUN echo "clear_env = no" >> /etc/php-fpm.d/www.conf
+RUN echo "clear_env = no" >> /etc/php-fpm.d/www.conf && \
+    echo "pm.max_spare_servers = 10" >> /etc/php-fpm.d/www.conf
 
 # CA cert for MySQL Database
 RUN mkdir -p /usr/local/share/ca-certificates && \
