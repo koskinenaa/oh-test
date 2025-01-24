@@ -72,7 +72,7 @@ define( 'NONCE_SALT',       get_env_value( 'WORDPRESS_NONCE_SALT',       'put yo
 /**
   * Filesystem
   */
-define( 'FS_METHOD', get_env_value( 'WORDPRESS_DB_COLLATE', 'direct' ) );
+define( 'FS_METHOD', get_env_value( 'WORDPRESS_FS_METHOD', 'direct' ) );
 
 /**
   * Debug
