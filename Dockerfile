@@ -1,7 +1,6 @@
 FROM registry.access.redhat.com/ubi9/php-81:latest
 
 ARG WP_CLI_URL="https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
-ARG COMPOSER_AUTH="{}"
 ARG COMPOSER_REPOSITORIES=""
 ARG COMPOSER_PACKAGES=""
 
@@ -37,7 +36,10 @@ RUN wget $WP_CLI_URL -O /usr/bin/wp && \
 ADD . /tmp/src/
 
 # Install the dependencies
-RUN chmod +x /tmp/src/.s2i/bin/assemble-wrapped /tmp/src/.s2i/bin/run-wrapped && /tmp/src/.s2i/bin/assemble-wrapped
+RUN --mount=type=secret,id=COMPOSER_AUTH \
+COMPOSER_AUTH=$(cat /run/secrets/COMPOSER_AUTH) \
+&& export COMPOSER_AUTH \
+&& chmod +x /tmp/src/.s2i/bin/assemble-wrapped /tmp/src/.s2i/bin/run-wrapped && /tmp/src/.s2i/bin/assemble-wrapped
 
 # Remove part which runs file permission operations
 RUN sed -i '/mkdir -p ${PHP_FPM_RUN_DIR}/,/chown -R 1001:0 ${PHP_FPM_LOG_PATH}/d' /usr/libexec/s2i/run
