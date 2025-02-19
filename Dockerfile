@@ -4,6 +4,7 @@ ARG WP_CLI_URL="https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp
 ARG COMPOSER_AUTH="{}"
 ARG COMPOSER_REPOSITORIES=""
 ARG COMPOSER_PACKAGES=""
+ARG MOUNT_SECRET="false"
 
 ENV PATH='/opt/app-root/src/bin:/opt/app-root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/app-root/src/vendor/bin'
 ENV AZURE_SQL_SSL_CA_PATH='/usr/local/share/ca-certificates/DigiCertGlobalRootCA.crt.pem'
@@ -15,10 +16,10 @@ ENV DISPLAY_ERRORS=OFF
 USER 0
 
 # github openshift build volume auth
-RUN mkdir /mnt/secrets/ && mkdir /opt/app-root/src/.config && \
-    mkdir /opt/app-root/src/.config/composer && \
-    touch /mnt/secrets/emptyfile && \
-    cp /mnt/secrets/* /opt/app-root/src/.config/composer
+RUN mkdir -p /opt/app-root/src/.config/composer && \
+    if [ -n "$MOUNT_SECRET" ] && [ "${MOUNT_SECRET,,}" = "true" ]; then \
+        cp /mnt/secrets/* /opt/app-root/src/.config/composer; \
+    fi
 
 RUN dnf update -y  && \
     dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
