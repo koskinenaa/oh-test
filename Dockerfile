@@ -14,6 +14,12 @@ ENV DISPLAY_ERRORS=OFF
 
 USER 0
 
+# github openshift build volume auth
+RUN mkdir /mnt/secrets/ && mkdir /opt/app-root/src/.config && \
+    mkdir /opt/app-root/src/.config/composer && \
+    touch /mnt/secrets/emptyfile && \
+    cp /mnt/secrets/* /opt/app-root/src/.config/composer
+
 RUN dnf update -y  && \
     dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
     dnf install -y https://dev.mysql.com/get/mysql80-community-release-el9-5.noarch.rpm && \
